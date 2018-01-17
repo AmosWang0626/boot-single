@@ -1,5 +1,7 @@
 package cn.amos.boot.dao.entity;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * PROJECT: boot
  * DATE: 2018/1/12
@@ -9,10 +11,29 @@ package cn.amos.boot.dao.entity;
 public class UserEntity {
 
     private Long id;
+    /**
+     * 用户编号
+     */
+    private String userId;
+    /**
+     * 用户名字
+     */
     private String name;
+    /**
+     * 用户年龄
+     */
     private Integer age;
+    /**
+     * 手机号
+     */
     private String phoneNo;
+    /**
+     * 用户住址
+     */
     private String address;
+    /**
+     * 身份证号
+     */
     private String identityNo;
 
     public Long getId() {
@@ -21,6 +42,14 @@ public class UserEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -65,13 +94,6 @@ public class UserEntity {
 
     @Override
     public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", phoneNo='" + phoneNo + '\'' +
-                ", address='" + address + '\'' +
-                ", identityNo='" + identityNo + '\'' +
-                '}';
+        return JSON.toJSONString(this);
     }
 }
