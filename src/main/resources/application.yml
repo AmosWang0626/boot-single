@@ -1,7 +1,6 @@
 server:
     # 设置端口以及访问前缀
     port: 8085
-    context-path: /boot
 
 spring:
     # 设置数据库连接
@@ -18,8 +17,5 @@ mybatis:
     configuration:
         # 开启驼峰映射
         map-underscore-to-camel-case: true
-
 logging:
-  level:
-    # 打印SQL
-    cn.amos.boot.dao.mapper: debug
+  level: debug

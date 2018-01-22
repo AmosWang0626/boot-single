@@ -1,6 +1,9 @@
 package cn.amos.boot.response;
 
+import cn.amos.boot.exception.UserExceptionEnum;
+
 import java.io.Serializable;
+import java.text.MessageFormat;
 
 /**
  * PROJECT: first
@@ -36,10 +39,15 @@ public class GeneralResponse<T> implements Serializable {
         this(GeneralEnum.SUCCESS, body);
     }
 
-    public GeneralResponse(IEnum iEnum, T body) {
+    private GeneralResponse(GeneralEnum iEnum, T body) {
         this.code = iEnum.getCode();
         this.msg = iEnum.getMsg();
         this.body = body;
+    }
+
+    public GeneralResponse(UserExceptionEnum iEnum, Object msg) {
+        this.code = iEnum.getCode();
+        this.msg = MessageFormat.format(iEnum.getMsg(), msg);
     }
 
     public GeneralResponse(IEnum iEnum) {

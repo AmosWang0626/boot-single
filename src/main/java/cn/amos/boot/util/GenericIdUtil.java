@@ -11,28 +11,31 @@ import java.util.Date;
 public class GenericIdUtil {
 
     /**
-     * 生成18位会员编号
+     * 生成16位会员编号
      */
-    public static Long genericUserId() {
+    public static String genericUserId() {
         StringBuffer sb = new StringBuffer();
-        sb.append(DateUtil.format(new Date(), DateUtil.MINUTE_DATE_PATTERN));
-        sb.append(RandomUtil.generateLuckyNumberString(6));
+        sb.append(DateUtil.format(new Date(), DateUtil.DEFAULT_DATE_PATTERN));
+        sb.append("U");
+        sb.append(RandomUtil.generateLuckyNumberString(7));
 
-        return Long.valueOf(sb.toString());
+        return sb.toString();
     }
 
     /**
      * 生成20位订单编号
      */
-    public static Long genericApplyNo() {
+    public static String genericApplyNo() {
         StringBuffer sb = new StringBuffer();
-        sb.append(DateUtil.format(new Date(), DateUtil.SECOND_DATE_PATTERN));
-        sb.append(RandomUtil.generateUpperString(6));
+        sb.append(DateUtil.format(new Date(), DateUtil.MINUTE_DATE_PATTERN));
+        sb.append("A");
+        sb.append(RandomUtil.generateUpperString(7));
 
-        return Long.valueOf(sb.toString());
+        return sb.toString();
     }
 
     public static void main(String[] args) {
-        System.out.println(genericUserId());
+        System.out.println("用户编号：" + genericUserId());
+        System.out.println("订单编号：" + genericApplyNo());
     }
 }

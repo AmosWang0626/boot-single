@@ -1,5 +1,8 @@
 package cn.amos.boot.service;
 
+import cn.amos.boot.request.UserRequest;
+import cn.amos.boot.response.GeneralResponse;
+
 /**
  * PROJECT: boot-single
  *
@@ -7,4 +10,12 @@ package cn.amos.boot.service;
  * @date 2018/1/17
  */
 public interface UserService {
+
+    /**
+     * 注册用户
+     *
+     * @param userRequest 用户表单
+     * @return 通用
+     */
+    GeneralResponse generateUser(UserRequest userRequest);
 }
