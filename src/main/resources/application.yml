@@ -1,14 +1,21 @@
 server:
+    # 设置端口以及访问前缀
     port: 8085
-    context-path: /boot
 
 spring:
+    # 设置数据库连接
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
         username: root
         password: root
         url: jdbc:mysql://127.0.0.1:3306/boot?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8
+    # 页面配置
+    thymeleaf:
+      cache: false
 
 mybatis:
     configuration:
+        # 开启驼峰映射
         map-underscore-to-camel-case: true
+logging:
+  level: debug

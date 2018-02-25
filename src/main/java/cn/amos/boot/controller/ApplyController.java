@@ -1,11 +1,9 @@
 package cn.amos.boot.controller;
 
-import cn.amos.boot.dao.entity.UserEntity;
-import cn.amos.boot.dao.mappers.UserMapper;
+import cn.amos.boot.dao.entity.ApplyEntity;
+import cn.amos.boot.dao.mappers.ApplyMapper;
 import cn.amos.boot.request.PageModel;
 import cn.amos.boot.response.PageResult;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +19,11 @@ import java.util.List;
  * @date 2018/1/15
  */
 @Controller
-@RequestMapping("user")
-public class UserController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+@RequestMapping("apply")
+public class ApplyController {
 
     @Resource
-    private UserMapper userMapper;
+    private ApplyMapper applyMapper;
 
     @RequestMapping("page")
     public String pageApply(@RequestParam(value = "page", required = false) Integer page,
@@ -38,9 +35,9 @@ public class UserController {
         PageModel pageModel = new PageModel();
         pageModel.setPage(page);
         pageModel.setRows(size);
-        List<UserEntity> applyEntities = userMapper.selectByPage(pageModel);
-        List<UserEntity> applyEntitiesAll = userMapper.selectAll();
-        PageResult<UserEntity> pageResult = new PageResult<>();
+        List<ApplyEntity> applyEntities = applyMapper.selectByPage(pageModel);
+        List<ApplyEntity> applyEntitiesAll = applyMapper.selectAll();
+        PageResult<ApplyEntity> pageResult = new PageResult<>();
         pageResult.setPage(page);
         pageResult.setSize(size);
         // 总记录数量
@@ -55,6 +52,6 @@ public class UserController {
         pageResult.setLast();
 
         model.addAttribute("pageResult", pageResult);
-        return "user";
+        return "apply";
     }
 }
