@@ -64,6 +64,10 @@ public class BootstrapPageResult<E> extends PageResult<E> {
         int basePage = (int) (getTotal() / size);
         int surplus = (int) (getTotal() % size);
         this.totalPages = (surplus > 0 ? basePage + 1 : basePage);
+        // totalPages 默认为1
+        if (totalPages < 1) {
+            this.totalPages = 1;
+        }
     }
 
 }

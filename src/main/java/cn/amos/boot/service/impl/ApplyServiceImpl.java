@@ -42,12 +42,13 @@ public class ApplyServiceImpl implements ApplyService {
         applyEntity.setIp(ip);
 
         applyEntity.setApplyNo(GenericIdUtil.genericApplyNo());
-        GeneralResponse<TaoBaoLocationDTO> locationByTaoBao = IpUtil.getLocationByTaoBao(ip);
-        if (locationByTaoBao.success()) {
-            TaoBaoLocationDTO locationDTO = locationByTaoBao.getBody();
-            applyEntity.setCity(locationDTO.getCity());
-            applyEntity.setLocation(locationDTO.getArea() + locationDTO.getRegion() + locationDTO.getCity());
-        }
+        /// 暂时去掉根据IP获取地理位置信息
+        // GeneralResponse<TaoBaoLocationDTO> locationByTaoBao = IpUtil.getLocationByTaoBao(ip);
+        // if (locationByTaoBao.success()) {
+        //     TaoBaoLocationDTO locationDTO = locationByTaoBao.getBody();
+        //     applyEntity.setCity(locationDTO.getCity());
+        //     applyEntity.setLocation(locationDTO.getArea() + locationDTO.getRegion() + locationDTO.getCity());
+        // }
         applyEntity.setCreateTime(new Date());
 
         applyMapper.insertApplyEntity(applyEntity);
