@@ -1,7 +1,8 @@
 package cn.amos.boot.dao.mappers;
 
+import cn.amos.boot.common.base.IPageMapper;
+import cn.amos.boot.common.base.PageModel;
 import cn.amos.boot.dao.entity.ApplyEntity;
-import cn.amos.boot.request.PageModel;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -17,7 +18,19 @@ import java.util.List;
  * @author DaoYuanWang
  */
 @Repository
-public interface ApplyMapper {
+public interface ApplyMapper extends IPageMapper<ApplyEntity, String> {
+
+    /**
+     * 插入一条数据
+     *
+     * @param applyEntity 类型
+     */
+    @Insert("INSERT INTO apply " +
+            "(APPLY_NO, USER_ID, APPLY_AMT, APPLY_TIME, APPLY_TYPE, APPLY_STATUS, REASON, IP, CITY, LOCATION, CREATE_TIME, UPDATE_TIME) " +
+            "VALUES(" +
+            "#{applyNo}, #{userId}, #{applyAmt}, #{applyTime}, #{applyType}, #{applyStatus}, #{reason}, " +
+            "#{ip}, #{city}, #{location}, #{createTime}, #{updateTime})")
+    void insertApplyEntity(ApplyEntity applyEntity);
 
     /**
      * 通过订单号查询订单
@@ -50,20 +63,18 @@ public interface ApplyMapper {
      * @param pageModel 分页参数
      * @return 指定订单
      */
-    @Select("select * from apply limit #{firstIndex}, #{rows}")
-    List<ApplyEntity> selectByPage(PageModel pageModel);
+    @Override
+    @Select("select COUNT(*) from apply")
+    Long selectTotal(PageModel<String> pageModel);
 
     /**
-     * 插入一条数据
+     * 根据分页参数获取订单
      *
-     * @param applyEntity 类型
-     * @return int
+     * @param pageModel 分页参数
+     * @return 指定订单
      */
-    @Insert("INSERT INTO apply " +
-            "(APPLY_NO, USER_ID, APPLY_AMT, APPLY_TIME, APPLY_TYPE, APPLY_STATUS, REASON, IP, CITY, LOCATION, CREATE_TIME, UPDATE_TIME) " +
-            "VALUES(" +
-            "#{applyNo}, #{userId}, #{applyAmt}, #{applyTime}, #{applyType}, #{applyStatus}, #{reason}, " +
-            "#{ip}, #{city}, #{location}, #{createTime}, #{updateTime})")
-    int insertApplyEntity(ApplyEntity applyEntity);
+    @Override
+    @Select("select * from apply limit #{firstIndex}, #{rows}")
+    List<ApplyEntity> selectByPage(PageModel<String> pageModel);
 
 }

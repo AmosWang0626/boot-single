@@ -1,11 +1,11 @@
 package cn.amos.boot.service.impl;
 
+import cn.amos.boot.common.base.GeneralResponse;
+import cn.amos.boot.common.util.GenericIdUtil;
 import cn.amos.boot.dao.entity.UserEntity;
 import cn.amos.boot.dao.mappers.UserMapper;
-import cn.amos.boot.request.UserRequest;
-import cn.amos.boot.response.GeneralResponse;
+import cn.amos.boot.model.request.UserRequest;
 import cn.amos.boot.service.UserService;
-import cn.amos.boot.util.GenericIdUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public GeneralResponse generateUser(UserRequest userRequest) {
+    public GeneralResponse<String> generateUser(UserRequest userRequest) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUserId(GenericIdUtil.genericUserId());
         userEntity.setName(userRequest.getName());

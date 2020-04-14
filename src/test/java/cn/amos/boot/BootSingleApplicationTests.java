@@ -1,15 +1,15 @@
 package cn.amos.boot;
 
-import cn.amos.boot.dto.TaoBaoLocationDTO;
-import cn.amos.boot.enums.ApplyStatusEnum;
-import cn.amos.boot.enums.ApplyTypeEnum;
-import cn.amos.boot.enums.AreaTestEnum;
-import cn.amos.boot.request.ApplyRequest;
-import cn.amos.boot.request.UserRequest;
-import cn.amos.boot.response.GeneralResponse;
+import cn.amos.boot.common.base.GeneralResponse;
+import cn.amos.boot.common.util.IpUtil;
+import cn.amos.boot.model.dto.TaoBaoLocationDTO;
+import cn.amos.boot.model.enums.ApplyStatusEnum;
+import cn.amos.boot.model.enums.ApplyTypeEnum;
+import cn.amos.boot.model.enums.AreaTestEnum;
+import cn.amos.boot.model.request.ApplyRequest;
+import cn.amos.boot.model.request.UserRequest;
 import cn.amos.boot.service.ApplyService;
 import cn.amos.boot.service.UserService;
-import cn.amos.boot.util.IpUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,7 +38,7 @@ public class BootSingleApplicationTests {
             applyRequest.setApplyTime(new Date());
             applyRequest.setIp("115.63.163.155");
             applyRequest.setReason("666666");
-            applyService.generateApply(applyRequest);
+            System.out.println(applyService.generateApply(applyRequest));
         }
     }
 
@@ -51,7 +51,7 @@ public class BootSingleApplicationTests {
             userRequest.setPhoneNo("189123412" + i);
             userRequest.setIdentityNo("4113811926021856" + i);
             userRequest.setAddress("上海市虹口区武进路" + i + "号");
-            userService.generateUser(userRequest);
+            System.out.println(userService.generateUser(userRequest));
         }
     }
 

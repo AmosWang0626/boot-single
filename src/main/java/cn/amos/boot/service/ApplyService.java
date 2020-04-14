@@ -1,7 +1,7 @@
 package cn.amos.boot.service;
 
-import cn.amos.boot.request.ApplyRequest;
-import cn.amos.boot.response.GeneralResponse;
+import cn.amos.boot.common.base.GeneralResponse;
+import cn.amos.boot.model.request.ApplyRequest;
 
 /**
  * PROJECT: boot-single
@@ -17,5 +17,5 @@ public interface ApplyService {
      * @param applyRequest 用户id
      * @return 通用
      */
-    GeneralResponse generateApply(ApplyRequest applyRequest);
+    GeneralResponse<String> generateApply(ApplyRequest applyRequest);
 }

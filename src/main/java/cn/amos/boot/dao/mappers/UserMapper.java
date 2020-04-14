@@ -1,7 +1,8 @@
 package cn.amos.boot.dao.mappers;
 
+import cn.amos.boot.common.base.IPageMapper;
+import cn.amos.boot.common.base.PageModel;
 import cn.amos.boot.dao.entity.UserEntity;
-import cn.amos.boot.request.PageModel;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,17 @@ import java.util.List;
  * @author DaoYuanWang
  */
 @Repository
-public interface UserMapper {
+public interface UserMapper extends IPageMapper<UserEntity, String> {
+
+    /**
+     * 添加用户
+     *
+     * @param userEntity 用户信息
+     */
+    @Insert("INSERT INTO user " +
+            "(USER_ID, NAME, AGE, PHONE_NO, ADDRESS, IDENTITY_NO, CREATE_TIME, UPDATE_TIME) " +
+            "VALUES(#{userId}, #{name}, #{age}, #{phoneNo}, #{address}, #{identityNo}, #{createTime}, #{updateTime})")
+    void insertUserEntity(UserEntity userEntity);
 
     /**
      * 根据用户编号查询
@@ -40,17 +51,18 @@ public interface UserMapper {
      * @param pageModel 分页参数
      * @return 指定订单
      */
-    @Select("select * from user limit #{firstIndex}, #{rows}")
-    List<UserEntity> selectByPage(PageModel pageModel);
+    @Override
+    @Select("select COUNT(*) from user")
+    Long selectTotal(PageModel<String> pageModel);
 
     /**
-     * 添加用户
+     * 根据分页参数获取订单
      *
-     * @param userEntity 用户信息
-     * @return 通用
+     * @param pageModel 分页参数
+     * @return 指定订单
      */
-    @Insert("INSERT INTO user " +
-            "(USER_ID, NAME, AGE, PHONE_NO, ADDRESS, IDENTITY_NO, CREATE_TIME, UPDATE_TIME) " +
-            "VALUES(#{userId}, #{name}, #{age}, #{phoneNo}, #{address}, #{identityNo}, #{createTime}, #{updateTime})")
-    int insertUserEntity(UserEntity userEntity);
+    @Override
+    @Select("select * from user limit #{firstIndex}, #{rows}")
+    List<UserEntity> selectByPage(PageModel<String> pageModel);
+
 }

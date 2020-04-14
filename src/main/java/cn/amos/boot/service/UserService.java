@@ -1,7 +1,7 @@
 package cn.amos.boot.service;
 
-import cn.amos.boot.request.UserRequest;
-import cn.amos.boot.response.GeneralResponse;
+import cn.amos.boot.common.base.GeneralResponse;
+import cn.amos.boot.model.request.UserRequest;
 
 /**
  * PROJECT: boot-single
@@ -17,5 +17,5 @@ public interface UserService {
      * @param userRequest 用户表单
      * @return 通用
      */
-    GeneralResponse generateUser(UserRequest userRequest);
+    GeneralResponse<String> generateUser(UserRequest userRequest);
 }

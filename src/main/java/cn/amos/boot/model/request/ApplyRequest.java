@@ -1,9 +1,8 @@
-package cn.amos.boot.dao.entity;
+package cn.amos.boot.model.request;
 
 import cn.amos.boot.model.enums.ApplyStatusEnum;
 import cn.amos.boot.model.enums.ApplyTypeEnum;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,16 +11,10 @@ import java.util.Date;
  * PROJECT: boot-single
  *
  * @author DaoYuanWang
- * @date 2018/1/17
+ * @date 2018/1/18
  */
-@Getter
-@Setter
-public class ApplyEntity {
-    private Long id;
-    /**
-     * 订单编号
-     */
-    private String applyNo;
+@Data
+public class ApplyRequest {
     /**
      * 用户编号
      */
@@ -50,21 +43,5 @@ public class ApplyEntity {
      * 交易ip
      */
     private String ip;
-    /**
-     * 交易城市
-     */
-    private String city;
-    /**
-     * 交易地址
-     */
-    private String location;
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
 
 }
