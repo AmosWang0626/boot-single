@@ -1,14 +1,10 @@
 package cn.amos.boot.web.controller;
 
-import cn.amos.boot.common.base.BootstrapPageResult;
-import cn.amos.boot.common.base.PageModel;
-import cn.amos.boot.common.base.PageResult;
-import cn.amos.boot.dao.entity.UserEntity;
-import cn.amos.boot.dao.mappers.UserMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cn.amos.boot.common.api.page.Page;
+import cn.amos.boot.core.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,25 +20,22 @@ import javax.annotation.Resource;
 @RequestMapping("user")
 public class UserController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-
     @Resource
-    private UserMapper userMapper;
+    private UserService userService;
 
-    @RequestMapping("page")
-    public String pageApply(@RequestParam(value = "page", required = false) Integer page,
-                            @RequestParam(value = "size", required = false) Integer size,
-                            Model model) {
+    @GetMapping
+    public String userManage(@RequestParam(value = "page", required = false) Integer page,
+                             @RequestParam(value = "size", required = false) Integer size,
+                             Model model) {
         if (page == null || size == null) {
-            return "parameterError";
+            return "error";
         }
-        PageModel<String> pageModel = new PageModel<>();
+
+        Page pageModel = new Page();
         pageModel.setPage(page);
-        pageModel.setRows(size);
+        pageModel.setSize(size);
 
-        PageResult<UserEntity> pageResult = userMapper.defaultFindByPage(pageModel);
-
-        model.addAttribute("pageResult", new BootstrapPageResult<>(page, size, pageResult));
+        model.addAttribute("pageResult", userService.findByPage(pageModel));
 
         return "user";
     }

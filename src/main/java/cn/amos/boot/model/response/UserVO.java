@@ -1,26 +1,15 @@
-package cn.amos.boot.dao.entity;
+package cn.amos.boot.model.response;
 
 import com.alibaba.fastjson.JSON;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
-import java.util.Date;
 
 /**
- * PROJECT: boot
- * DATE: 2018/1/12
+ * DESCRIPTION: UserVO
  *
- * @author DaoYuanWang
+ * @author <a href="mailto:daoyuan0626@gmail.com">amos.wang</a>
+ * @date 2021/2/6
  */
-@Entity
-@Table(name = "org_user", indexes = {
-        @Index(columnList = "username")
-})
-public class UserEntity {
+public class UserVO {
 
-    @Id
-    @GeneratedValue(generator = "uuid-self")
-    @GenericGenerator(name = "uuid-self", strategy = "uuid2")
     private String id;
     /**
      * 用户名字
@@ -41,11 +30,11 @@ public class UserEntity {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
     /**
      * 更新时间
      */
-    private Date updateTime;
+    private String updateTime;
 
     public String getId() {
         return id;
@@ -59,8 +48,8 @@ public class UserEntity {
         return username;
     }
 
-    public void setUsername(String name) {
-        this.username = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Integer getAge() {
@@ -87,19 +76,19 @@ public class UserEntity {
         this.address = address;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 
